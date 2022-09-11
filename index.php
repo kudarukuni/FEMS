@@ -8,17 +8,31 @@
 	$password = "";
 	$dbname = "fems_db";
 	$con = mysqli_connect($server, $username, $password, $dbname) or die("unable to connect");
-	$sql = "SELECT * FROM sensordata";
-	echo '  <table cellspacing = "5" cellpadding="5"><tr><th>ID</th><th>BREATHER LEVEL</th><th>FUEL LEVEL</th><th>DATE</th><th>TIME</th></tr>';
-	$result=mysqli_query($con,$sql);
+
+	$sql = "SELECT * FROM gasdata";
+	$sql1 = "SELECT * FROM fueldata";
+
+	echo '  <table cellspacing = "5" cellpadding="5"><tr><th>ID</th><th>BREATHER LEVEL</th><th>DATE</th><th>TIME</th></tr>';
+	$result1=mysqli_query($con, $sql);
+	if ($result1->num_rows > 0) {
+	    while($row = $result1->fetch_assoc()) { 
+	    	$row_id1 = $row["id"];
+	      	$row_blevel = $row["blevel"];
+	      	$row_date1 = $row["date"];
+	      	$row_time1 = $row["time"];
+	        echo '	<tr><td>' . $row_id1 . '</td><td>' . $row_blevel . '</td><td>' . $row_date1 . '</td><td>' . $row_time1 . '</td></tr>';
+		}
+	}
+
+	echo '  <table cellspacing = "5" cellpadding="5"><tr><th>ID</th><th>FUEL TANK LEVEL</th><th>DATE</th><th>TIME</th></tr>';
+	$result=mysqli_query($con, $sql1);
 	if ($result->num_rows > 0) {
 	    while($row = $result->fetch_assoc()) { 
 	    	$row_id = $row["id"];
-	      	$row_blevel = $row["blevel"];
 	      	$row_flevel = $row["flevel"];
 	      	$row_date = $row["date"];
 	      	$row_time = $row["time"];
-	        echo '	<tr><td>' . $row_id . '</td><td>' . $row_blevel . '</td><td>' . $row_flevel . '</td><td>' . $row_date . '</td><td>' . $row_time . '</td></tr>';
+	        echo '	<tr><td>' . $row_id . '</td><td>' . $row_flevel . '</td><td>' . $row_date . '</td><td>' . $row_time . '</td></tr>';
 		}
 	}
 ?>

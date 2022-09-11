@@ -26,7 +26,7 @@ void loop(){
   int s1 = analogRead(A0);
   
   if(s1 < 400){
-    Serial.println("FUEL LEVEL LOW");
+    Serial.println(s1);
     digitalWrite(14, HIGH);
     delay(5000);
     digitalWrite(14, LOW);
@@ -36,8 +36,10 @@ void loop(){
     display.setTextSize(1);
     display.println("FUEL LEVEL");
     display.println();
-    display.setTextSize(2); 
-    display.println("LOW");
+    display.setTextSize(2);
+    display.print("LOW: "); 
+    display.print(s1);
+    display.println("L");
     display.display();
     display.startscrollright(0x00, 0x00); 
     delay(5000);
@@ -53,7 +55,9 @@ void loop(){
     display.println("FUEL LEVEL");
     display.println();
     display.setTextSize(2); 
-    display.println("HIGH");
+    display.print("HIGH: ");
+    display.print(s1);
+    display.println("L");
     display.display();
     display.startscrollright(0x00, 0x00); 
     delay(5000);
